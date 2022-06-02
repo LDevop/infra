@@ -35,16 +35,14 @@ pipeline {
         stage('Terraform apply') {
             steps {
                 script {
-                    
-                        sh '''
-                            terraform init
-                            terraform plan -out tfplan
-                        '''
-                        timeout(time:10, unit:'MINUTES') {
-                            input 'Are you sure to run terraform apply?'
-                        }
-                        sh 'terraform apply -input=false tfplan'
-                    
+                    sh '''
+                        terraform init
+                        terraform plan -out tfplan
+                    '''
+                    timeout(time:10, unit:'MINUTES') {
+                        input 'Are you sure to run terraform apply?'
+                    }
+                    sh 'terraform apply -input=false tfplan'
                 }
             }
         }
