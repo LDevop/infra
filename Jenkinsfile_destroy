@@ -22,22 +22,12 @@ pipeline {
     }
 
     stages {
-        // stage('Chekout') {
-        //     steps {
-        //         script {
-        //             git branch: 'main',
-        //                 credentialsId: 'github-ssh-key',
-        //                 url: GIT_URL
-        //         }
-        //     }
-        // }
-
-        stage('Terraform apply') {
+        stage('Terraform destroy') {
             steps {
                 script {
                     sh '''
                         terraform init
-                        terraform plan -out tfplan
+                        terraform plan -destroy -out tfplan
                     '''
                     timeout(time:10, unit:'MINUTES') {
                         input 'Are you sure to run terraform apply?'
