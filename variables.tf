@@ -53,7 +53,7 @@ variable "cidr_vpc" {
 
 variable "amis" {
   description = "Which AMI to spawn."
-  default =  "ami-02cf6acbf74959916"
+  default     = "ami-02cf6acbf74959916"
 }
 
 variable "instance_type" {

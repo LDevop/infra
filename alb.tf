@@ -9,10 +9,10 @@ resource "aws_alb" "alb" {
 }
 
 resource "aws_alb_target_group" "myapp-tg" {
-  name        = "myapp-tg"
-  port        = 80
-  protocol    = "HTTP"
-  vpc_id      = aws_vpc.cluster-vpc.id
+  name     = "myapp-tg"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = aws_vpc.cluster-vpc.id
 
   health_check {
     healthy_threshold   = 5
@@ -32,7 +32,7 @@ resource "aws_alb_listener" "adminer-app" {
   port              = 80
   protocol          = "HTTP"
   depends_on        = [aws_alb_target_group.myapp-tg]
-  
+
   default_action {
     type             = "forward"
     target_group_arn = aws_alb_target_group.myapp-tg.arn

@@ -12,7 +12,7 @@ resource "aws_security_group" "alb-sg" {
     to_port     = var.app_port
     cidr_blocks = ["0.0.0.0/0"]
   }
-  
+
   ingress {
     protocol    = "tcp"
     from_port   = 80

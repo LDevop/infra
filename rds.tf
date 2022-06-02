@@ -15,7 +15,7 @@ resource "aws_db_instance" "adminer_rds" {
   engine                 = "mariadb"
   engine_version         = "10.6.7"
   instance_class         = "db.t3.micro"
-  name                   = "db_adminer"  
+  db_name                = "db_adminer"
   identifier             = "adminer-mariadb"
   username               = "foo"
   password               = "foobarbaz"
