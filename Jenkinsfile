@@ -35,7 +35,7 @@ pipeline {
         stage('Terraform apply') {
             steps {
                 script {
-                    dir('terraform') {
+                    
                         sh '''
                             terraform init
                             terraform plan -out tfplan
@@ -44,7 +44,7 @@ pipeline {
                             input 'Are you sure to run terraform apply?'
                         }
                         sh 'terraform apply -input=false tfplan'
-                    }
+                    
                 }
             }
         }
