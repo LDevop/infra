@@ -16,8 +16,9 @@ pipeline {
     }
     
     environment {
-        // AWS_API_KEY = credentials('aws-api-key')
-        // AWS_API_SECRET = credentials('aws-api-secret')
+        AWS_ACCESS_KEY_ID = credentials('aws-api-key')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-api-secret')
+        AWS_REGION = 'eu-south-1'
         GIT_URL = 'git@github.com:LDevop/infra.git'
     }
 
