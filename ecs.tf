@@ -2,8 +2,14 @@ resource "aws_ecs_cluster" "ecs-cluster" {
   name = "ecs-cluster"
   setting {
     name  = "containerInsights"
-    value = "enabled"
+    value = "enabled" #if enabled cluster in update error
   }
+}
+
+
+resource "aws_key_pair" "key_aws" {
+  key_name   = "id_rsa_aws"
+  public_key = var.public_key
 }
 
 resource "aws_launch_configuration" "ecs" {
@@ -13,6 +19,7 @@ resource "aws_launch_configuration" "ecs" {
   security_groups             = [aws_security_group.ecs_sg.id]
   iam_instance_profile        = aws_iam_instance_profile.ecs.name
   associate_public_ip_address = true
+  key_name                    = aws_key_pair.key_aws.key_name
   user_data                   = "#!/bin/bash\necho ECS_CLUSTER='ecs-cluster' > /etc/ecs/ecs.config"
 }
 
@@ -20,11 +27,11 @@ data "template_file" "adminer-app" {
   template = file("./task-definitions/image.json")
 
   vars = {
-    app_image      = var.app_image
-    app_port       = var.app_port
-    fargate_cpu    = var.fargate_cpu
-    fargate_memory = var.fargate_memory
-    aws_region     = var.aws_region
+    app_image  = var.app_image
+    app_port   = var.app_port
+    cpu        = var.cpu
+    memory     = var.memory
+    aws_region = var.aws_region
   }
 }
 

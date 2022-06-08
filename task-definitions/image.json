@@ -2,8 +2,8 @@
   {
     "name": "adminer-app",
     "image": "${app_image}",
-    "cpu": ${fargate_cpu},
-    "memory": ${fargate_memory},
+    "cpu": ${cpu},
+    "memory": ${memory},
     "networkMode": "bridge",
     "logConfiguration": {
       "logDriver": "awslogs",

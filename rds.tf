@@ -1,12 +1,12 @@
-data "aws_vpc" "cluster-vpc" {
-  id = aws_vpc.cluster-vpc.id
-}
-data "aws_subnet_ids" "subnet_ids" {
-  vpc_id = data.aws_vpc.cluster-vpc.id
-}
+# data "aws_vpc" "cluster-vpc" {
+#   id = aws_vpc.cluster-vpc.id
+# }
+# data "aws_subnet_ids" "subnet_ids" {
+#   vpc_id = data.aws_vpc.cluster-vpc.id
+# }
 resource "aws_db_subnet_group" "subnet_rds" {
   name       = "subnet_mariadb"
-  subnet_ids = data.aws_subnet_ids.subnet_ids.ids
+  subnet_ids = aws_subnet.private.*.id #data.aws_subnet_ids.subnet_ids.ids
 }
 
 resource "aws_db_instance" "adminer_rds" {
@@ -17,8 +17,8 @@ resource "aws_db_instance" "adminer_rds" {
   instance_class         = "db.t3.micro"
   db_name                = "db_adminer"
   identifier             = "adminer-mariadb"
-  username               = "foo"
-  password               = "foobarbaz"
+  username               = var.db_username
+  password               = var.db_password
   skip_final_snapshot    = true
   db_subnet_group_name   = aws_db_subnet_group.subnet_rds.name
   vpc_security_group_ids = [aws_security_group.ecs_sg.id]

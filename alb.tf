@@ -10,7 +10,7 @@ resource "aws_alb" "alb" {
 
 resource "aws_alb_target_group" "myapp-tg" {
   name     = "myapp-tg"
-  port     = 80
+  port     = 8080 #80
   protocol = "HTTP"
   vpc_id   = aws_vpc.cluster-vpc.id
 
@@ -23,6 +23,11 @@ resource "aws_alb_target_group" "myapp-tg" {
     path                = var.health_check_path
     interval            = 30
     port                = "traffic-port"
+  }
+
+  stickiness {
+    type = "lb_cookie"
+    cookie_duration = 600
   }
 }
 

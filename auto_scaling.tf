@@ -6,6 +6,11 @@ resource "aws_autoscaling_group" "ecs-cluster" {
   health_check_type    = "EC2"
   launch_configuration = aws_launch_configuration.ecs.name
   vpc_zone_identifier  = aws_subnet.private.*.id
+  tag {
+    key                 = "Name"
+    propagate_at_launch = true
+    value               = "ECS-cluster"
+  }
 }
 
 resource "aws_appautoscaling_target" "ecs_target" {
@@ -26,7 +31,7 @@ resource "aws_appautoscaling_policy" "ecs_policy_up" {
 
   step_scaling_policy_configuration {
     adjustment_type         = "ChangeInCapacity"
-    cooldown                = 60
+    cooldown                = 30
     metric_aggregation_type = "Maximum"
 
     step_adjustment {
