@@ -63,7 +63,7 @@ variable "instance_type" {
 variable "db_username" {
 }
 
-variable "db_password" { 
+variable "db_password" {
 }
 
 variable "public_key" {

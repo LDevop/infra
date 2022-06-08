@@ -26,7 +26,7 @@ resource "aws_alb_target_group" "myapp-tg" {
   }
 
   stickiness {
-    type = "lb_cookie"
+    type            = "lb_cookie"
     cookie_duration = 600
   }
 }
