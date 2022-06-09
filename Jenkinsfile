@@ -11,6 +11,10 @@ pipeline {
         timestamps()
     }
 
+    parameters {
+        string name: 'VERSION', defaultValue: '', description: 'Application version'
+    }
+
     tools {
         terraform 'terraform'
     }
@@ -18,28 +22,18 @@ pipeline {
     environment {
         AWS_ACCESS_KEY_ID = credentials('aws-api-key')
         AWS_SECRET_ACCESS_KEY = credentials('aws-api-secret')
-        AWS_REGION = 'eu-south-1'
+        AWS_REGION = 'eu-central-1'
         GIT_URL = 'git@github.com:LDevop/infra.git'
     }
 
     stages {
-        // stage('Chekout') {
-        //     steps {
-        //         script {
-        //             git branch: 'main',
-        //                 credentialsId: 'github-ssh-key',
-        //                 url: GIT_URL
-        //         }
-        //     }
-        // }
-
         stage('Terraform apply') {
             steps {
                 script {
-                    sh '''
+                    sh """
                         terraform init
-                        terraform plan -out tfplan
-                    '''
+                        terraform plan -out tfplan -var app_image=ldevop/adminer:${VERSION}
+                    """
                     timeout(time:10, unit:'MINUTES') {
                         input 'Are you sure to run terraform apply?'
                     }
