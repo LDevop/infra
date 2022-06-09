@@ -23,7 +23,10 @@ pipeline {
         AWS_ACCESS_KEY_ID = credentials('aws-api-key')
         AWS_SECRET_ACCESS_KEY = credentials('aws-api-secret')
         AWS_REGION = 'eu-central-1'
+        AWS_PUBLIC_KEY = credentials('aws_public_key')
+        DB_CREDS = credentials('db_creds')
         GIT_URL = 'git@github.com:LDevop/infra.git'
+        
     }
 
     stages {
@@ -32,7 +35,11 @@ pipeline {
                 script {
                     sh """
                         terraform init
-                        terraform plan -out tfplan -var app_image=ldevop/adminer:${VERSION}
+                        terraform plan -out tfplan \
+                            -var app_image=ldevop/adminer:${VERSION} \
+                            -var db_username=\$DB_CREDS_USR \
+                            -var db_password=\$DB_CREDS_PSW \
+                            -var public_key="\$AWS_PUBLIC_KEY"
                     """
                     timeout(time:10, unit:'MINUTES') {
                         input 'Are you sure to run terraform apply?'
