@@ -35,7 +35,7 @@ pipeline {
                 script {
                     sh """
                         terraform init
-                        terraform plan -out tfplan \
+                        terraform plan -out tfplan -parallelism=2 \
                             -var app_image=ldevop/adminer:${VERSION} \
                             -var db_username=\$DB_CREDS_USR \
                             -var db_password=\$DB_CREDS_PSW \
