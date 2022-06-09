@@ -60,11 +60,11 @@ variable "instance_type" {
   default = "t2.micro"
 }
 
-variable "db_username" {
-}
+# variable "db_username" {
+# }
 
-variable "db_password" {
-}
+# variable "db_password" {
+# }
 
-variable "public_key" {
-}
+# variable "public_key" {
+# }

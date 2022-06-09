@@ -36,10 +36,10 @@ pipeline {
                     sh """
                         terraform init
                         terraform plan -out tfplan -parallelism=2 \
-                            -var app_image=ldevop/adminer:${VERSION} \
-                            -var db_username=\$DB_CREDS_USR \
-                            -var db_password=\$DB_CREDS_PSW \
-                            -var public_key="\$AWS_PUBLIC_KEY"
+                            -var app_image=ldevop/adminer:${VERSION}
+                            // -var db_username=\$DB_CREDS_USR \
+                            // -var db_password=\$DB_CREDS_PSW \
+                            // -var public_key="\$AWS_PUBLIC_KEY"
                     """
                     timeout(time:10, unit:'MINUTES') {
                         input 'Are you sure to run terraform apply?'
