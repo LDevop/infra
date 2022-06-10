@@ -61,10 +61,13 @@ variable "instance_type" {
 }
 
 variable "db_username" {
+  default = ""
 }
 
 variable "db_password" {
+  default = ""
 }
 
 variable "public_key" {
+  default = ""
 }
