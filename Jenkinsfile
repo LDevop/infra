@@ -41,9 +41,9 @@ pipeline {
                             -var db_password=\$DB_CREDS_PSW \
                             -var public_key="\$AWS_PUBLIC_KEY"
                     """
-                    timeout(time:10, unit:'MINUTES') {
-                        input 'Are you sure to run terraform apply?'
-                    }
+                    // timeout(time:10, unit:'MINUTES') {
+                    //     input 'Are you sure to run terraform apply?'
+                    // }
                     sh 'terraform apply -input=false tfplan'
                 }
             }
