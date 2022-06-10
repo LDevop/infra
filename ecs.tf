@@ -7,10 +7,10 @@ resource "aws_ecs_cluster" "ecs-cluster" {
 }
 
 
-# resource "aws_key_pair" "key_aws" {
-#   key_name   = "id_rsa_aws"
-#   public_key = var.public_key
-# }
+resource "aws_key_pair" "key_aws" {
+  key_name   = "id_rsa_aws"
+  public_key = var.public_key
+}
 
 resource "aws_launch_configuration" "ecs" {
   name                        = "${var.name}-for ECS"
@@ -19,7 +19,7 @@ resource "aws_launch_configuration" "ecs" {
   security_groups             = [aws_security_group.ecs_sg.id]
   iam_instance_profile        = aws_iam_instance_profile.ecs.name
   associate_public_ip_address = true
-  #key_name                    = aws_key_pair.key_aws.key_name
+  key_name                    = aws_key_pair.key_aws.key_name
   user_data                   = "#!/bin/bash\necho ECS_CLUSTER='ecs-cluster' > /etc/ecs/ecs.config"
 }
 
