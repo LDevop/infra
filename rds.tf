@@ -1,12 +1,6 @@
-# data "aws_vpc" "cluster-vpc" {
-#   id = aws_vpc.cluster-vpc.id
-# }
-# data "aws_subnet_ids" "subnet_ids" {
-#   vpc_id = data.aws_vpc.cluster-vpc.id
-# }
 resource "aws_db_subnet_group" "subnet_rds" {
   name       = "subnet_mariadb"
-  subnet_ids = aws_subnet.private.*.id #data.aws_subnet_ids.subnet_ids.ids
+  subnet_ids = aws_subnet.private.*.id
 }
 
 resource "aws_db_instance" "adminer_rds" {

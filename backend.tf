@@ -1,3 +1,4 @@
+# Backend in jenkins master, but my job don't start, after moved in s3
 # terraform {
 #   backend "local" {
 #     path = "/home/ubuntu/tfstate/terraform.tfstate"

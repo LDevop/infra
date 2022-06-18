@@ -1,4 +1,4 @@
-#in this template we are creating aws application laadbalancer and target group and alb http listener
+#this template we are creating aws application loadbalancer and target group and alb http listener
 
 resource "aws_alb" "alb" {
   name               = "ecs-load-balancer"
@@ -10,7 +10,7 @@ resource "aws_alb" "alb" {
 
 resource "aws_alb_target_group" "myapp-tg" {
   name     = "myapp-tg"
-  port     = 8080 #80
+  port     = var.app_port #8080
   protocol = "HTTP"
   vpc_id   = aws_vpc.cluster-vpc.id
 
@@ -34,7 +34,7 @@ resource "aws_alb_target_group" "myapp-tg" {
 #redirecting all incomming traffic from ALB to the target group
 resource "aws_alb_listener" "adminer-app" {
   load_balancer_arn = aws_alb.alb.id
-  port              = 80
+  port              = var.alb_listener_port
   protocol          = "HTTP"
   depends_on        = [aws_alb_target_group.myapp-tg]
 

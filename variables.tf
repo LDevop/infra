@@ -24,6 +24,11 @@ variable "app_port" {
   description = "portexposed on the docker image"
 }
 
+variable "alb_listener_port" {
+  default     = "80"
+  description = "port exposed for alb listener"
+}
+
 variable "app_count" {
   default     = "2" #choose 2 bcz i have choosen 2 AZ
   description = "numer of docker containers to run"

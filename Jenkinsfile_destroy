@@ -37,6 +37,7 @@ pipeline {
             }
         }
     }
+    
     post {
         failure {
             echo 'Something went wrong' //notifications placeholder
