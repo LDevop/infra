@@ -34,7 +34,7 @@ data "template_file" "adminer-app" {
 }
 
 resource "aws_ecs_task_definition" "ecs-def" {
-  family                   = "task-definition-1"
+  family                   = "task-definition"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
   network_mode             = "bridge"
   requires_compatibilities = ["EC2"]

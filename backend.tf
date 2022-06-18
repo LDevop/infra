@@ -9,7 +9,7 @@ terraform {
   backend "s3" {
     bucket = "tfstate-for-jenkins"
     key    = "jenkins/terraform.tfstate"
-    region = "eu-central-1"
+    region = var.aws_region
   }
 
 }
