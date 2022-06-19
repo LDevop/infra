@@ -21,7 +21,7 @@ resource "aws_alb_target_group" "myapp-tg" {
     protocol            = "HTTP"
     matcher             = "200"
     path                = var.health_check_path
-    interval            = 30
+    interval            = 10
     port                = "traffic-port"
   }
 

@@ -57,3 +57,12 @@ resource "aws_ecs_service" "ecs-service" {
 
   depends_on = [aws_alb_listener.adminer-app, aws_iam_role_policy_attachment.ecs_task_execution_role, aws_iam_role_policy.ecs-service-role-policy]
 }
+resource "null_resource" "update-service" {
+  triggers = {
+    arn = aws_ecs_task_definition.ecs-def.arn
+  }
+
+  provisioner "local-exec" {
+    command = "aws ecs update-service --cluster ${aws_ecs_service.ecs-service.cluster} --service ${aws_ecs_service.ecs-service.name} --task-definition ${aws_ecs_task_definition.ecs-def.arn} --force-new-deployment"
+  }
+}
