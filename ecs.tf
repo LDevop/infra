@@ -49,6 +49,10 @@ resource "aws_ecs_service" "ecs-service" {
   launch_type         = "EC2"
   scheduling_strategy = "REPLICA"
 
+  ordered_placement_strategy {
+    type  = "random"
+  }
+
   load_balancer {
     target_group_arn = aws_alb_target_group.myapp-tg.arn
     container_name   = "adminer-app"
