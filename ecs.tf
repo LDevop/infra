@@ -48,7 +48,7 @@ resource "aws_ecs_service" "ecs-service" {
   desired_count        = var.app_count
   launch_type          = "EC2"
   scheduling_strategy  = "REPLICA"
-  force_new_deployment = var.app_image
+  force_new_deployment = true
 
   ordered_placement_strategy {
     type = "random"
