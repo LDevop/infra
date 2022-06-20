@@ -47,7 +47,7 @@ resource "aws_ecs_service" "ecs-service" {
   task_definition      = aws_ecs_task_definition.ecs-def.arn
   desired_count        = var.app_count
   launch_type          = "EC2"
-  scheduling_strategy  = "REPLICA"
+  scheduling_strategy  = "DAEMON" #"REPLICA"
   force_new_deployment = true
 
   ordered_placement_strategy {
