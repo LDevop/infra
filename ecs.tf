@@ -42,13 +42,14 @@ resource "aws_ecs_task_definition" "ecs-def" {
 }
 
 resource "aws_ecs_service" "ecs-service" {
-  name                 = "ecs-service"
-  cluster              = aws_ecs_cluster.ecs-cluster.id
-  task_definition      = aws_ecs_task_definition.ecs-def.arn
-  desired_count        = var.app_count
-  launch_type          = "EC2"
-  scheduling_strategy  = "REPLICA"
-  force_new_deployment = true
+  name                               = "ecs-service"
+  cluster                            = aws_ecs_cluster.ecs-cluster.id
+  task_definition                    = aws_ecs_task_definition.ecs-def.arn
+  desired_count                      = var.app_count
+  launch_type                        = "EC2"
+  scheduling_strategy                = "REPLICA"
+  deployment_minimum_healthy_percent = "50"
+  force_new_deployment               = true
 
   ordered_placement_strategy {
     type = "random"
