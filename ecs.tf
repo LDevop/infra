@@ -51,7 +51,7 @@ resource "aws_ecs_service" "ecs-service" {
   deployment_minimum_healthy_percent = "50"
   deployment_maximum_percent         = "200"
   health_check_grace_period_seconds  = "0"
-  force_new_deployment = true
+  force_new_deployment               = true
 
   ordered_placement_strategy {
     type  = "spread"
