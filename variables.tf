@@ -39,12 +39,12 @@ variable "health_check_path" {
 }
 
 variable "cpu" {
-  default     = "512"
+  default     = "256"
   description = "instacne CPU units to provision,my requirent 1 vcpu so gave 1024"
 }
 
 variable "memory" {
-  default     = "1024"
+  default     = "512"
   description = "instance memory to provision (in MiB) not MB"
 }
 
