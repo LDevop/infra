@@ -52,8 +52,7 @@ resource "aws_ecs_service" "ecs-service" {
   force_new_deployment               = true
 
   ordered_placement_strategy {
-    type = "binpack"#"random"
-    field = "cpu"
+    type = "random"
   }
 
   load_balancer {
