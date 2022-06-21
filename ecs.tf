@@ -51,11 +51,11 @@ resource "aws_ecs_service" "ecs-service" {
   deployment_minimum_healthy_percent = "50"
   deployment_maximum_percent         = "200"
   #health_check_grace_period_seconds  = "5"
-  force_new_deployment               = true
+  force_new_deployment = true
 
   ordered_placement_strategy {
     type  = "spread"
-    field = "instanceId"
+    field = "attribute:ecs.availability-zone" #"instanceId"
   }
 
   load_balancer {
