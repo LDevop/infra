@@ -1,6 +1,6 @@
 #Needs sertificate
 resource "aws_route53_zone" "r53_zone" {
-  name = "adminer.testing.pamparam.com"
+  name = "adminer.pamparam.com"
 }
 
 resource "aws_route53_record" "dns" {
