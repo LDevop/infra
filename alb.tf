@@ -10,7 +10,7 @@ resource "aws_alb" "alb" {
 
 resource "aws_alb_target_group" "myapp-tg" {
   name     = "myapp-tg"
-  port     = var.app_port #8080
+  port     = var.app_port
   protocol = "HTTP"
   vpc_id   = aws_vpc.cluster-vpc.id
 

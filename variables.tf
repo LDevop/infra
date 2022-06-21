@@ -39,12 +39,12 @@ variable "health_check_path" {
 }
 
 variable "cpu" {
-  default     = "1024"
+  default     = "512"
   description = "instacne CPU units to provision,my requirent 1 vcpu so gave 1024"
 }
 
 variable "memory" {
-  default     = "256"
+  default     = "1024"
   description = "instance memory to provision (in MiB) not MB"
 }
 
@@ -58,7 +58,7 @@ variable "cidr_vpc" {
 
 variable "amis" {
   description = "Which AMI to spawn."
-  default     = "ami-093cfc6e8a3d255f9" #"ami-02cf6acbf74959916"
+  default     = "ami-093cfc6e8a3d255f9"
 }
 
 variable "instance_type" {
