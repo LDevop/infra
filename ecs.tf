@@ -49,8 +49,8 @@ resource "aws_ecs_service" "ecs-service" {
   launch_type                        = "EC2"
   scheduling_strategy                = "REPLICA"
   deployment_minimum_healthy_percent = "50"
-  deployment_maximum_percent         = "100"
-  health_check_grace_period_seconds  = "30"
+  deployment_maximum_percent         = "200"
+  health_check_grace_period_seconds  = "5"
   force_new_deployment               = true
 
   ordered_placement_strategy {
