@@ -1,4 +1,5 @@
 #Needs sertificate
+/*
 resource "aws_route53_zone" "r53_zone" {
   name = "adminer.pamparam.com"
 }
@@ -14,3 +15,4 @@ resource "aws_route53_record" "dns" {
     zone_id                = aws_alb.alb.zone_id
   }
 }
+*/
