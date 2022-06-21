@@ -1,5 +1,6 @@
+#Needs sertificate
 resource "aws_route53_zone" "r53_zone" {
-  name = "pupkinsite.boloto.com."
+  name = "adminer.test.com"
 }
 
 resource "aws_route53_record" "dns" {
