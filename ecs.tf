@@ -54,7 +54,7 @@ resource "aws_ecs_service" "ecs-service" {
   force_new_deployment               = true
 
   ordered_placement_strategy {
-    type = "random"
+    type = "spread"
   }
 
   load_balancer {
