@@ -48,11 +48,11 @@ resource "aws_ecs_service" "ecs-service" {
   desired_count                      = var.app_count
   launch_type                        = "EC2"
   scheduling_strategy                = "REPLICA"
-  deployment_minimum_healthy_percent = "25"
+  deployment_minimum_healthy_percent = "50"
   force_new_deployment               = true
 
   ordered_placement_strategy {
-    type = "random"
+    type = "spread"#"random"
   }
 
   load_balancer {
