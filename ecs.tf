@@ -9,7 +9,7 @@ resource "aws_key_pair" "key_aws" {
   key_name   = "id_rsa_aws"
   public_key = var.public_key
 }
-
+#use later launch_template
 resource "aws_launch_configuration" "ecs" {
   name                        = "${var.name}-for ECS"
   image_id                    = var.amis
@@ -48,7 +48,7 @@ resource "aws_ecs_service" "ecs-service" {
   desired_count                      = var.app_count
   launch_type                        = "EC2"
   scheduling_strategy                = "REPLICA"
-  deployment_minimum_healthy_percent = "50"
+  deployment_minimum_healthy_percent = "25"
   force_new_deployment               = true
 
   ordered_placement_strategy {
