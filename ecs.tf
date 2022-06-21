@@ -53,6 +53,7 @@ resource "aws_ecs_service" "ecs-service" {
 
   ordered_placement_strategy {
     type = "binpack"#"random"
+    field = "cpu"
   }
 
   load_balancer {
