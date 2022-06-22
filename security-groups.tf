@@ -15,8 +15,8 @@ resource "aws_security_group" "alb-sg" {
 
   ingress {
     protocol    = "tcp"
-    from_port   = 80
-    to_port     = 80
+    from_port   = var.alb_listener_port
+    to_port     = var.alb_listener_port
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -42,8 +42,8 @@ resource "aws_security_group" "ecs_sg" {
   }
   ingress {
     protocol    = "tcp"
-    from_port   = 80
-    to_port     = 80
+    from_port   = var.alb_listener_port
+    to_port     = var.alb_listener_port
     cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {

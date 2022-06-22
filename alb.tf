@@ -13,7 +13,6 @@ resource "aws_alb_target_group" "myapp-tg" {
   port     = var.app_port #80?
   protocol = "HTTP"
   vpc_id   = aws_vpc.cluster-vpc.id
-  #target_type = "ip" #new line
 
   health_check {
     healthy_threshold   = "3" #5
@@ -23,7 +22,7 @@ resource "aws_alb_target_group" "myapp-tg" {
     matcher             = "200"
     path                = var.health_check_path
     interval            = "10"
-    port                = "traffic-port" #8080?
+    port                = "traffic-port"
   }
 
   stickiness {
