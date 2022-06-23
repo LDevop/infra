@@ -52,13 +52,23 @@ pipeline {
     post {
         failure {
             withCredentials([string(credentialsId: 'tokenid', variable: 'TOKEN'), string(credentialsId: 'chatWebid', variable: 'CHAT_ID')]) {
-            sh 'curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d text="ECS FAILURE"'
+            sh ("""
+            curl -s -X POST https://api.telegram.org/bot\$TOKEN/sendMessage\
+            -d chat_id=\$CHAT_ID\
+            -d parse_mode=markdown\
+            -d text='*${env.JOB_NAME}* : *Branch*: ${env.GIT_BRANCH} *Build* : `NOT OK` *Published* = `NO`'
+            """)
             }
             echo 'Something went wrong' //notifications placeholder
         }
         success {
             withCredentials([string(credentialsId: 'tokenid', variable: 'TOKEN'), string(credentialsId: 'chatWebid', variable: 'CHAT_ID')]) {
-            sh 'curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d text="ECS is runing after fine build :)"'
+            sh ("""
+            curl -s -X POST https://api.telegram.org/bot\$TOKEN/sendMessage\
+            -d chat_id=\$CHAT_ID\
+            -d parse_mode=markdown\
+            -d text='*${env.JOB_NAME}* : *Branch*: ${env.GIT_BRANCH} *Build* : `OK` *Published* = `YES`'
+            """)
             }
             echo 'Successful'
         }
