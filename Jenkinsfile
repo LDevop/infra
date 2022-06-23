@@ -51,13 +51,15 @@ pipeline {
     }
     post {
         failure {
+            withCredentials([string(credentialsId: 'tokenid', variable: 'TOKEN'), string(credentialsId: 'chatWebid', variable: 'CHAT_ID')]) {
+            sh 'curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d text="ECS FAILURE"'
+            }
             echo 'Something went wrong' //notifications placeholder
         }
         success {
-            echo 'Successful build'
-        }
-        always {
-            // cleanWs deleteDirs: true
+            withCredentials([string(credentialsId: 'tokenid', variable: 'TOKEN'), string(credentialsId: 'chatWebid', variable: 'CHAT_ID')]) {
+            sh 'curl -s -X POST https://api.telegram.org/bot${TOKEN}/sendMessage -d chat_id=${CHAT_ID} -d text="ECS is runing after fine build :)"'
+            }
             echo 'Successful'
         }
     }
